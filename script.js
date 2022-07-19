@@ -1,65 +1,67 @@
-let num1='';
-let num2='';
-let operator='';
-let total='';
+let n1='';
+let n2='';
+let op='';
+let ans='';
 
 $(document).ready(function(){
-
     $('button').on('click',function(e){
         let btn=e.target.innerHTML;
-        if(btn>='0' && btn<='9'){
+        if(btn>="0" && btn<="9"|| btn=='.'){
             handleNumber(btn);
         }
         else if(btn === 'Clear'){
-            n1 = n2 = operator='';
+            n1 = n2 = op='';
             ans=0;
             displayButton(ans);
         }
         else{
             handleOperator(btn);
         }
-        
     });
+
 });
 
-
-
 function handleNumber(num){
-    if(num1===''){
-        num1=num;
+    if(op===""){
+        n1+=num;
+        displayButton(n1);
     }
     else{
-        num2=num;
+        n2+=num;
+        displayButton(n2);
     }
-    displayButton(num);
+
 }
 
 function handleOperator(oper){
-    if(operator===''){
-        operator=oper;
+    if(op===""){
+        op=oper;
     }
-    else
-    {
-        handleTotal();
-        operator=oper;
+    else{
+        handleAns();
+        op=oper;
     }
 }
 
-function handleTotal(){
-    switch(operator){
-        case '+':total+= +num1 + +num2;
-                 displayButton(total);
-        break;
-        case '-':total+= +num1 - +num2;
-                 displayButton(total);
-        break;
-        case '/':total+= +num1 / +num2;
-                 displayButton(total);
-        break;
-        case '*':total+= +num1 * +num2;
-                 displayButton(total);
-        break;
-        
+
+function handleAns(){
+    switch(op){
+        case '+':
+            ans= +n1 + +n2;
+            displayButton(ans);
+            break;
+        case '-':
+            ans= +n1 - +n2;
+            displayButton(ans);
+            break;
+        case '/':
+            ans= +n1 / +n2;
+            displayButton(ans);
+            break;
+        case '*':
+            ans= +n1 * +n2;
+            displayButton(ans);
+            break;
     }
 
     updateVariables();
@@ -70,6 +72,6 @@ function displayButton(btn){
 }
 
 function updateVariables(){
-    num1+=total;
-    num2='';
+    n1=ans;
+    n2='';
 }
